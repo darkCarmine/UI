@@ -1,0 +1,17 @@
+<div class="row form-space">
+	<div ng-repeat="e in form" ng-if="e.show" class="col-md-9">
+		<div class="col-md-4"><span ng-bind="e.required ? '*' : '&nbsp&nbsp'" class="c-red"></span>{{e.label + ':'}}</div>
+		<div ng-if="e.type == 'textbox'" class="col-md-8"><input type="textbox" ng-model="e.value"></div>
+		<div ng-if="e.type == 'password'" class="col-md-8"><input type="password" ng-model="e.value"></div>
+		<div ng-if="e.type == 'textarea'" class="col-md-8"><textarea ng-model="e.value"></textarea></div>
+		<div ng-if="e.type == 'select'" class="col-md-8">
+			<select class="fm-select" title="{{e.label}}" ng-model="e.select" ng-options="e.label for e in e.options"></select>
+		</div>
+	</div>
+</div>
+
+<style type="text/css">
+	.form-space > * {
+		margin:0 10px 10px 0;
+	}
+</style>

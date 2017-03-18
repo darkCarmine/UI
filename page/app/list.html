@@ -1,0 +1,24 @@
+<div class="page-space">
+	<div class="page-header">
+		<h3>{{"应用"}}</h3>
+		<p>{{"应用简介"}}</p>
+	</div>
+
+	<div class="action">
+		<button class="ti-btn ti-btn-primary" ng-click="showCreate = true">{{"创建"}}</button>
+		<span class="glyphicon glyphicon-refresh pull-right"></span>
+	</div>
+
+	<div>
+		<fm-table columns="appTable.columns" data="appTable.data" tr="appTable.template" td="appTable.template"></fm-table>
+
+		<fm-template html="appTable.template._head">
+			<span ng-click="row._expand=!row._expand" class="glyphicon"
+				ng-class="{'glyphicon-chevron-right':!row._expand,  'glyphicon-chevron-down':row._expand}"></span>
+		</fm-template>
+		<fm-template html="appTable.template._expand">
+			<fm-view template="'app/detail.html'" ctrl="'app/detail'"></fm-view>
+		</fm-template>
+	</div>
+	<fm-dialog caption="'创建'" template="'app/create.html'" ctrl="'app/create'" show="showCreate" height="300">
+</div>

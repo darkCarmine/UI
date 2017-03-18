@@ -1,0 +1,57 @@
+<table class="table table-skiped">
+	<tr>
+		<th ng-repeat="key in columns">
+			<span ng-bind="key.title"></span>
+			<span style="color:#d5d5d5;" class="glyphicon glyphicon-filter pull-right"
+				ng-if="key.title !== ''" ng-click="key.filter=!key.filter"></span>
+			<div ng-if="key.filter">
+				<input type="text" ng-model="key.filterKey" ng-change="changePage()">
+			</div>
+		</th>
+	</tr>
+	<tr ng-repeat-start="row in rows">
+		<td ng-repeat="key in columns">
+			<fm-view ng-if="td[key.data]" template="td[key.data]"></fm-view>	
+			<span ng-if="!td[key.data]" ng-bind="row[key.data]"></span>
+		</td>
+	</tr>
+	<tr ng-show="row._expand" ng-repeat-end>
+		<td colspan="{{columns.length}}">
+			<fm-view ng-if="row._expand" template="tr._expand"></fm-view>
+		</td>
+	</tr>
+</table>
+
+<div class="fm-pagination" ng-if="total > 10">
+	<select class="fm-select" ng-model="page.pageSize" ng-options="v for v in page.list"
+		ng-change="changePageSize()"></select>
+	<span>{{total}}</span>
+	<a>&lt;</a>
+	<a ng-class="{'page-active': p == page.index}" ng-repeat="p in page.pageList track by $index" ng-click="selectPage(p)">{{p}}</a>
+	<a>&gt;</a>
+</div>
+
+<style type="text/css">
+	.table-skiped>tbody>tr>th {
+		padding: 6px;
+		background-color: #f3f3f3;
+		border-right: 1px solid #ddd
+	}
+	.fm-pagination > * {
+		border-radius: 4px;
+		padding: 3px 6px;
+	}
+	.fm-pagination a {
+		border: 1px solid #c3c3c3;
+		cursor: pointer;
+		margin-left: 5px;
+	}
+	.fm-pagination a:hover {
+		outline: none;
+	}
+	a.page-active {
+		background-color: #32bbff;
+		color: #fff;
+		border: 1px solid #428bca;
+	}
+</style>

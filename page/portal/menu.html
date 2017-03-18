@@ -1,0 +1,26 @@
+<link rel="stylesheet" type="text/css" href="theme/main.css">
+
+<div class="top-menu">
+	<ul>
+		<li ng-repeat="m1 in menu" ng-class="{menu_active:subActive(m1)}">
+			<a ui-sref="{{m1.state}}">{{m1.label}}</a>
+		</li>
+	</ul>
+
+	<span class="right-menu">
+		<a href="#" ng-click="about()" class="glyphicon glyphicon-question-sign"></a>
+		<a href="#" ng-click="logout()" class="glyphicon glyphicon-log-out"></a>
+		<span>{{userInfo().name}}</span>
+		<a href="#" ng-click="modify()" class="glyphicon glyphicon-user"></a>
+	</div>
+</div>
+
+<div>
+	<ul class="left-menu">
+		<li ng-repeat="m2 in select_menu.child" ng-class="{child_actice:active(m2)}">
+			<a style="color:#333;" ui-sref="{{m2.state}}">{{m2.label}}</a>
+		</li>
+	</ul>
+
+	<div class="page-content" ui-view></div>
+</div>
